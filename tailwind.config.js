@@ -3,7 +3,7 @@ module.exports = {
 	prefix: 'tw-',
 	important: false,
 	content: [
-		// "./**/*.{html, jsx, js}",
+		"./**/*.{html, jsx, js}",
 		"./src/restaurant/nutrio/*.{html,jsx, js}",
 		"./src/restaurant/nutrio/*.js",
 		"./src/restaurant/nutrio/*.html",
