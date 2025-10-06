@@ -39,7 +39,8 @@
         class="tw-flex tw-min-h-[100vh] tw-flex-col tw-bg-[#fff] tw-font-mono"
     >
         <header
-            class="tw-sticky tw-top-0 tw-z-20 tw-flex tw-h-[60px] tw-w-full tw-backdrop-blur-md tw-bg-white/80 tw-px-[5%] tw-shadow-sm max-lg:tw-mr-auto max-lg:tw-px-4 lg:tw-justify-around"
+            id="main-header"
+            class="tw-fixed tw-top-0 tw-z-20 tw-flex tw-h-[60px] tw-w-full tw-backdrop-blur-md tw-bg-white/80 tw-px-[5%] tw-shadow-sm tw-transition-transform tw-duration-300 ease-in-out max-lg:tw-mr-auto max-lg:tw-px-4 lg:tw-justify-around"
         >
             <a 
                 class="tw-flex tw-place-items-center tw-h-[50px] tw-p-[4px] tw-text-3xl tw-font-semibold"
@@ -61,6 +62,59 @@
                 </div>
             </div>
         </header>
+
+        <script>
+            const header = document.getElementById('main-header');
+            let lastScroll = 0;
+            let isHeaderVisible = true;
+
+            function showHeader() {
+                header.style.transform = 'translateY(0)';
+                isHeaderVisible = true;
+            }   
+
+            function hideHeader() {
+                header.style.transform = 'translateY(-100%)';
+                isHeaderVisible = false;
+            }
+
+            // Scroll behavior
+            window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+    
+            // Always show at top
+            if (currentScroll <= 50) {
+                showHeader();
+                lastScroll = currentScroll;
+                return;
+            }
+    
+            // Hide on scroll down, show on scroll up
+            if (currentScroll > lastScroll && isHeaderVisible) {
+                hideHeader();
+            } else if (currentScroll < lastScroll && !isHeaderVisible) {
+                showHeader();
+            }
+    
+            lastScroll = currentScroll;
+            });
+
+        // Mouse proximity (desktop only)
+            if (window.innerWidth >= 1024) {
+            document.addEventListener('mousemove', (e) => {
+            if (e.clientY < 80 && !isHeaderVisible && window.pageYOffset > 50) {
+                showHeader();
+            }
+            });
+            }
+
+        // Hide initially if scrolled
+            window.addEventListener('load', () => {
+            if (window.pageYOffset > 100) {
+                setTimeout(() => hideHeader(), 1000);
+            }
+            });
+        </script>
 
         <section id="hero"
             class="tw-relative tw-flex tw-min-h-[100vh] tw-w-full tw-max-w-[100vw] tw-flex-col tw-overflow-hidden max-lg:tw-p-4 max-md:tw-mt-[50px]"
@@ -85,20 +139,20 @@
                     <div
                         class="reveal-hero-text tw-mt-2 tw-max-w-[450px] tw-p-2 tw-text-justify max-lg:tw-max-w-full"
                     >
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Error adipisci corrupti accusamus reiciendis
-                        similique assumenda nostrum fuga dicta vitae ipsum.
+                        I am a Computer Science student majoring in <u>Data Science</u> at Bina Nusantara University. 
+                        I am interested in analyzing large datasets, visualizing data, and building machine learning and deep learning models using Python and R. 
+                        I have developed several projects that apply data analysis and machine learning techniques to solve real-world problems.
                     </div>
                 </div>
                 <div
                     class="tw-flex tw-w-full tw-max-w-[50%] tw-place-content-center tw-place-items-center tw-overflow-hidden max-lg:tw-max-w-[unset]"
                 >
                     <div
-                        class="tw-relative tw-flex tw-max-h-[580px] tw-min-h-[450px] tw-min-w-[350px] tw-max-w-[650px] tw-overflow-hidden max-lg:tw-h-fit max-lg:tw-max-h-[320px] max-lg:tw-min-h-[180px] max-lg:tw-w-[320px] max-lg:tw-min-w-[320px]"
+                        class="tw-relative tw-flex tw-max-h-[600px] tw-min-h-[400px] tw-min-w-[300px] tw-max-w-[450px] tw-overflow-hidden max-lg:tw-h-fit max-lg:tw-max-h-[320px] max-lg:tw-min-h-[180px] max-lg:tw-w-[320px] max-lg:tw-min-w-[320px]"
                     >
                         <img
-                            src="./assets/images/home/man.jpg"
-                            alt="app"
+                            src="./assets/images/people/profile.jpg"
+                            alt="profile_picture"
                             class="reveal-hero-img tw-z-[1] tw-h-full tw-w-full tw-object-contain"
                         />
                     </div>
@@ -107,10 +161,119 @@
         </section>
 
         <section
+            class="tw-relative tw-flex tw-min-h-[80vh] tw-w-full tw-max-w-[100vw] tw-flex-col tw-place-content-center tw-place-items-center tw-overflow-hidden tw-p-6"
+            id="skill"
+        >
+            <div
+                class="tw-mt-8 tw-flex tw-flex-col tw-place-items-center tw-gap-5"
+            >
+                <div
+                    class="reveal-up tw-mt-5 tw-flex tw-flex-col tw-gap-3 tw-text-center"
+                >
+                    <h2 class="tw-text-4xl tw-font-semibold">
+                        Skills & Expertise
+                    </h2>
+                </div>
+                <div
+                    class="tw-mt-6 tw-flex tw-max-w-[60%] tw-flex-wrap tw-place-content-center tw-gap-2 max-lg:tw-flex-col"
+                >
+                    <div
+                        class="reveal-up tw-flex tw-min-h-[150px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4"
+                    >
+                        <!-- <img src="./assets/images/home/sample.jpg" 
+                                alt="feature1"> -->
+                        <div class="tw-flex tw-gap-1">
+                            <i class="bi bi-clipboard-data-fill tw-text-2xl"></i>
+                            <h3 class="tw-text-2xl tw-font-semibold">
+                                Data Analysis
+                            </h3>
+                        </div>
+                        <div class="tw-text-[#595959]">
+                            Skilled in performing comprehensive Exploratory Data Analysis (EDA) using Python (pandas, matplotlib, seaborn) and R, 
+                            including data cleaning, visualization, and extracting actionable insights from large datasets.
+                        </div>
+                    </div>
+                    <div
+                        class="reveal-up tw-flex tw-min-h-[150px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4"
+                    >
+                        <!-- <img src="./assets/images/home/sample.jpg" 
+                                alt="feature1"> -->
+                        <div class="tw-flex tw-gap-1">
+                            <i class="bi bi-0-circle-fill tw-text-2xl"></i>
+                            <h3 class="tw-text-2xl tw-font-semibold">
+                                ML & DL
+                            </h3>
+                        </div>
+                        <div class="tw-text-[#595959]">
+                           Experienced in building machine learning and deep learning models using Python (Scikit-learn, TensorFlow, Keras) to solve real-world data problems, 
+                           including predictive modeling, sentiment analysis, and classification.
+                        </div>
+                    </div>
+                    <div
+                        class="reveal-up tw-flex tw-min-h-[150px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4"
+                    >
+                        <!-- <img src="./assets/images/home/sample.jpg" 
+                                alt="feature1"> -->
+                        <div class="tw-flex tw-gap-1">
+                            <i class="bi bi-calculator-fill tw-text-2xl"></i>
+                            <h3 class="tw-text-2xl tw-font-semibold">
+                                Statistics
+                            </h3>
+                        </div>
+                        <div class="tw-text-[#595959]">
+                            Proficient in statistical analysis and hypothesis testing to uncover patterns and support data-driven decision-making.
+                        </div>
+                    </div>
+                    <div
+                        class="reveal-up tw-flex tw-min-h-[150px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4"
+                    >
+                        <!-- <img src="./assets/images/home/sample.jpg" 
+                                alt="feature1"> -->
+                        <div class="tw-flex tw-gap-1">
+                            <i class="bi bi-database-fill tw-text-2xl"></i>
+                            <h3 class="tw-text-2xl tw-font-semibold">
+                                Database
+                            </h3>
+                        </div>
+                        <div class="tw-text-[#595959]">
+                            Experienced in designing, querying, and managing relational databases such as MySQL to support data analysis and reporting.
+                        </div>
+                    </div>
+                    <div
+                        class="reveal-up tw-flex tw-min-h-[150px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4"
+                    >
+                        <!-- <img src="./assets/images/home/sample.jpg" 
+                                alt="feature1"> -->
+                        <div class="tw-flex tw-gap-1">
+                            <i class="bi bi-shield-fill tw-text-2xl"></i>
+                            <h3 class="tw-text-2xl tw-font-semibold">Figma</h3>
+                        </div>
+                        <div class="tw-text-[#595959]">
+                            Experienced in designing user-friendly prototypes for various data visualization projects and applications.
+                        </div>
+                    </div>
+                    <div
+                        class="reveal-up tw-flex tw-min-h-[150px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4"
+                    >
+                        <!-- <img src="./assets/images/home/sample.jpg" 
+                                alt="feature1"> -->
+                        <div class="tw-flex tw-gap-1">
+                            <i class="bi bi-github tw-text-2xl"></i>
+                            <h3 class="tw-text-2xl tw-font-semibold">Github</h3>
+                        </div>
+                        <div class="tw-text-[#595959]">
+                            Proficient in version control using Git and GitHub for collaborative data science projects.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="project"
             class="tw-relative tw-flex tw-min-h-[100vh] tw-w-full tw-max-w-[100vw] tw-flex-col tw-place-items-center tw-overflow-hidden tw-p-6 tw-py-5"
         >
             <h3 class="reveal-up tw-text-6xl tw-font-medium max-lg:tw-text-3xl">
-                Past works
+                Projects
             </h3>
             <div
                 class="reveal-up tw-my-4 tw-h-[1px] tw-w-[80%] tw-bg-black"
@@ -434,132 +597,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section
-            class="tw-relative tw-flex tw-min-h-[80vh] tw-w-full tw-max-w-[100vw] tw-flex-col tw-place-content-center tw-place-items-center tw-overflow-hidden tw-p-6"
-            id=""
-        >
-            <div
-                class="tw-mt-8 tw-flex tw-flex-col tw-place-items-center tw-gap-5"
-            >
-                <div
-                    class="reveal-up tw-mt-5 tw-flex tw-flex-col tw-gap-3 tw-text-center"
-                >
-                    <h2 class="tw-text-4xl tw-font-semibold">
-                        Work with an expert
-                    </h2>
-                </div>
-                <div
-                    class="tw-mt-6 tw-flex tw-max-w-[60%] tw-flex-wrap tw-place-content-center tw-gap-2 max-lg:tw-flex-col"
-                >
-                    <div
-                        class="reveal-up tw-flex tw-h-[150px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4"
-                    >
-                        <!-- <img src="./assets/images/home/sample.jpg" 
-                                alt="feature1"> -->
-                        <div class="tw-flex tw-gap-1">
-                            <i class="bi bi-boombox-fill tw-text-2xl"></i>
-                            <h3 class="tw-text-2xl tw-font-semibold">
-                                Frontend developer
-                            </h3>
-                        </div>
-                        <div class="tw-text-[#595959]">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit.
-                        </div>
-                    </div>
-                    <div
-                        class="reveal-up tw-flex tw-h-[150px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4"
-                    >
-                        <!-- <img src="./assets/images/home/sample.jpg" 
-                                alt="feature1"> -->
-                        <div class="tw-flex tw-gap-1">
-                            <i class="bi bi-0-circle-fill tw-text-2xl"></i>
-                            <h3 class="tw-text-2xl tw-font-semibold">
-                                ML & AI
-                            </h3>
-                        </div>
-                        <div class="tw-text-[#595959]">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit.
-                        </div>
-                    </div>
-                    <div
-                        class="reveal-up tw-flex tw-h-[150px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4"
-                    >
-                        <!-- <img src="./assets/images/home/sample.jpg" 
-                                alt="feature1"> -->
-                        <div class="tw-flex tw-gap-1">
-                            <i class="bi bi-0-square-fill tw-text-2xl"></i>
-                            <h3 class="tw-text-2xl tw-font-semibold">
-                                Backend developer
-                            </h3>
-                        </div>
-                        <div class="tw-text-[#595959]">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit.
-                        </div>
-                    </div>
-                    <div
-                        class="reveal-up tw-flex tw-h-[150px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4"
-                    >
-                        <!-- <img src="./assets/images/home/sample.jpg" 
-                                alt="feature1"> -->
-                        <div class="tw-flex tw-gap-1">
-                            <i class="bi bi-database-fill tw-text-2xl"></i>
-                            <h3 class="tw-text-2xl tw-font-semibold">
-                                Database
-                            </h3>
-                        </div>
-                        <div class="tw-text-[#595959]">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit.
-                        </div>
-                    </div>
-                    <div
-                        class="reveal-up tw-flex tw-h-[150px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4"
-                    >
-                        <!-- <img src="./assets/images/home/sample.jpg" 
-                                alt="feature1"> -->
-                        <div class="tw-flex tw-gap-1">
-                            <i class="bi bi-cake-fill tw-text-2xl"></i>
-                            <h3 class="tw-text-2xl tw-font-semibold">Redis</h3>
-                        </div>
-                        <div class="tw-text-[#595959]">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit.
-                        </div>
-                    </div>
-                    <div
-                        class="reveal-up tw-flex tw-h-[150px] tw-w-[350px] tw-flex-col tw-gap-2 tw-p-4"
-                    >
-                        <!-- <img src="./assets/images/home/sample.jpg" 
-                                alt="feature1"> -->
-                        <div class="tw-flex tw-gap-1">
-                            <i class="bi bi-shield-fill tw-text-2xl"></i>
-                            <h3 class="tw-text-2xl tw-font-semibold">Figma</h3>
-                        </div>
-                        <div class="tw-text-[#595959]">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit.
-                        </div>
-                    </div>
-                </div>
-
-                <a
-                    href="https://tally.so/r/woO0Kx"
-                    aria-label="signup"
-                    class="reveal-up tw-flex tw-h-[40px] tw-place-items-center tw-gap-2 tw-rounded-full tw-bg-black tw-p-1 tw-pl-4 tw-text-white"
-                >
-                    <span>Get in touch</span>
-                    <div
-                        class="tw-flex tw-h-[30px] tw-w-[30px] tw-place-content-center tw-place-items-center tw-rounded-full tw-bg-white tw-font-semibold tw-text-black"
-                    >
-                        <i class="bi bi-arrow-up-right"></i>
-                    </div>
-                </a>
             </div>
         </section>
 
